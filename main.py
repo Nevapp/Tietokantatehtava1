@@ -9,7 +9,10 @@ def get_mittaukset(location: str, date: str):
 
            query= """
            SELECT arvo,aika
-           FROM mittaukset
+           FROM mittaukset m
+           JOIN sensori s ON m.sensoriID = s.ID
+           Join mittauspaikka mp ON s.MittauspaikkaID = mp.id
+           Where mp.id = %s
            WHERE DATE(aika)=%s
            """
            cursor.execute(query,(date,))
@@ -20,7 +23,13 @@ def get_mittaukset(location: str, date: str):
 def count_mittaukset(location: str):
  conn= get_connection()
  cursor= conn.cursor()
- cursor.execute("SELECT COUNT(*) FROM mittaukset")
+
+           query = """
+           SELECT COUNT(*) FROM mittaukset m
+           Join sensori s ON m.sensoriID = s.ID
+           WHERE s.MittauspaikkaID = %s
+           """
+ cursor.execute(query, (location,))
  count = cursor.fetchone()[0]
  return {"count":count}
 
@@ -31,8 +40,11 @@ def average(sensori: str, date: str):
 
            query="""
            SELECT AVG(arvo)
-           FROM mittaukset
-           WHERE DATE(aika)=%s
+           FROM mittaukset m
+           JOIN sensori s ON m.sensoriID = s.ID
+           WHERE s.MittauspaikkaID = s.ID
+           AND s.ID = %s
+           AND DATE(aika)=%s
            """
           cursor.execute(query,(date,))
           avg=cursor.fetchone()[0]
