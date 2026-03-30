@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from database import get_connection
+from databeissi import get_connection
 
 app =FastAPI()
 @app.get("/mittaukset/{location}/{date}")
