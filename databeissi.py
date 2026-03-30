@@ -4,5 +4,5 @@ def get_connection():
   host="localhost",
   user="root",
   password="qwerty123",
-  database="ilmanlaatu.mvb")
+  database="ilmanlaatu")
   return conn
