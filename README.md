@@ -6,7 +6,7 @@ Sovelluksella pystyy laskemaan kaikkien sijainnin (Helsinki) mittausten määrä
 Käyttäminen:
 1. Cloonaa repositorio
 2. Asenna Dependencies
-3. Starttaa FastAPI serveri Uvicornilla (komento joka toimii: python -m uvicorn main:app --reload)
+3. mene projektikansioon ja starttaa FastAPI serveri Uvicornilla (komento joka toimii: python -m uvicorn main:app --reload)
 4. API tulee näkyviin http://localhost:8000
 
 Endpointien käyttö:
